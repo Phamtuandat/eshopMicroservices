@@ -1,0 +1,10 @@
+﻿global using Carter;
+global using MediatR;
+global using Mapster;
+global using BuildingBlocks.CQRS;
+global using Catalog.API.Model;
+global using Microsoft.AspNetCore.Mvc;
+global using Marten; 
+global using Marten.Schema;
+global using BuildingBlocks.Exceptions;
+global using Catalog.API.Exceptions;
