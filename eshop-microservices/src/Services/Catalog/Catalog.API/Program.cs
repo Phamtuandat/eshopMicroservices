@@ -1,4 +1,5 @@
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 var assembly = typeof(Program).Assembly;
@@ -14,6 +15,7 @@ builder.Services.AddMarten(opts =>
 {
     opts.Connection(builder.Configuration.GetConnectionString("Database")!);
 }).UseLightweightSessions();
+builder.Services.AddValidatorsFromAssembly(assembly);
 
 builder.Services.AddHealthChecks().AddNpgSql(builder.Configuration.GetConnectionString("Database")!);
 
@@ -24,6 +26,7 @@ if (builder.Environment.IsDevelopment())
 }
 
 var app = builder.Build();
+app.Logger.LogInformation(builder.Configuration.GetConnectionString("Database"));
 app.UseExceptionHandler(options => { });
 app.MapCarter();
 app.UseHealthChecks("/health",

@@ -4,7 +4,7 @@ using FluentValidation;
 namespace Catalog.API.Products.DeleteProduct
 {
     public record DeleteProductCommand(Guid Id) : ICommand<DeleteProductResult> { }
-    public record DeleteProductResult(bool deleted);
+    public record DeleteProductResult(bool Deleted);
     public class DeleteProductCommandValidator : AbstractValidator<DeleteProductCommand>
     {
         public DeleteProductCommandValidator()

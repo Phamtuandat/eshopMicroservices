@@ -6,7 +6,7 @@ namespace Catalog.API.Products.DeleteProduct
     public class DeleteProductEnpoint : ICarterModule
     {
         public record DeleteProductRequest( int Id) { };
-        public record DeleteProductResponse(bool deleted) { }
+        public record DeleteProductResponse(bool Deleted);
 
         public void AddRoutes(IEndpointRouteBuilder app)
         {
