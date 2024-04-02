@@ -4,12 +4,21 @@ services:
   catalogdb:
     image: postgres
 
+
+
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
       context: .
       dockerfile: src/Services/Catalog/Catalog.API/Dockerfile
 
+  discount.grpc:
+    image: ${DOCKER_REGISTRY-}discountgrpc
+    build:
+      context: .
+      dockerfile: src/Services/Discount/Discount.GRPC/Dockerfile
+
 volumes:
   postgres_catalog:
     
+

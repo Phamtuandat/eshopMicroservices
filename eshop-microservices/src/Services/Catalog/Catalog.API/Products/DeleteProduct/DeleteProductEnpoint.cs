@@ -10,12 +10,13 @@ namespace Catalog.API.Products.DeleteProduct
 
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapDelete("/products", async ([FromBody] DeleteProductRequest request, [FromServices] ISender sender) =>
+            app.MapDelete("/products/{id}", async (Guid id, [FromServices] ISender sender) =>
             {
-                var command = request.Adapt<DeleteProductCommand>();
-                var result = sender.Send(command);
+                var result = await sender.Send(new DeleteProductCommand(id));
+
                 var response = result.Adapt<DeleteProductResponse>();
-                return response;
+
+                return Results.Ok(response);
             })
                 .WithName("DeleteProduct")
             .Produces<DeleteProductResponse>(StatusCodes.Status202Accepted)
