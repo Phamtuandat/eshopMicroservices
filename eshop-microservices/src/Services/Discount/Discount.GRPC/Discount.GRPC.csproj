@@ -22,7 +22,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
   </ItemGroup>
-	<ItemGroup>
-		<Protobuf Include="Protos\discount.proto" GrpcServices="Server" />
-	</ItemGroup>
+    <ItemGroup>
+	    <Protobuf Include="Protos\discount.proto" GrpcServices="Server" />
+    </ItemGroup>
 </Project>
