@@ -1,0 +1,9 @@
+﻿global using Ordering.Domain.Models;
+global using Ordering.Application.Dtos;
+global using Microsoft.EntityFrameworkCore;
+global using BuildingBlocks.CQRS;
+global using BuildingBlocks.Pagination;
+global using Ordering.Application.Data;
+global using Ordering.Application.Extensions;
+global using FluentValidation;
+global using Ordering.Domain.ValueObjects;
