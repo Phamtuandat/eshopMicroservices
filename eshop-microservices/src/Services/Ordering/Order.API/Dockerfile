@@ -11,6 +11,7 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["src/Services/Ordering/Order.API/Ordering.API.csproj", "src/Services/Ordering/Order.API/"]
 COPY ["src/Services/Ordering/Order.Application/Ordering.Application.csproj", "src/Services/Ordering/Order.Application/"]
+COPY ["src/BuildingBlocks.Messaging/BuildingBlocks.Messaging.csproj", "src/BuildingBlocks.Messaging/"]
 COPY ["src/BuildingBlocks/BuildingBlocks.csproj", "src/BuildingBlocks/"]
 COPY ["src/Services/Ordering/Order.Domain/Ordering.Domain.csproj", "src/Services/Ordering/Order.Domain/"]
 COPY ["src/Services/Ordering/Order.Infrastructure/Ordering.Infrastructure.csproj", "src/Services/Ordering/Order.Infrastructure/"]

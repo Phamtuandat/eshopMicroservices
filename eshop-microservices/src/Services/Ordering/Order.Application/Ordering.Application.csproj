@@ -11,12 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks.Messaging\BuildingBlocks.Messaging.csproj" />
     <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.csproj" />
     <ProjectReference Include="..\Order.Domain\Ordering.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Orders\EventHandlers\" />
   </ItemGroup>
 
 </Project>
