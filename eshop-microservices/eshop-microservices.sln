@@ -33,7 +33,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.Domain", "src\Serv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.Infrastructure", "src\Services\Ordering\Order.Infrastructure\Ordering.Infrastructure.csproj", "{1581CFDB-FFED-4E81-B652-D438756A6F70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks.Messaging", "src\BuildingBlocks.Messaging\BuildingBlocks.Messaging.csproj", "{5752C385-402C-4C1E-8DE9-7352F075FDF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingBlocks.Messaging", "src\BuildingBlocks.Messaging\BuildingBlocks.Messaging.csproj", "{5752C385-402C-4C1E-8DE9-7352F075FDF8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{E9AD62AE-A67E-47BD-911E-69EF38C8C1B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +101,7 @@ Global
 		{A81C1EA0-A8E9-4750-9024-FC75F43D393F} = {F6F0EFFA-9270-42B0-9AC2-4E04FA188AB7}
 		{1581CFDB-FFED-4E81-B652-D438756A6F70} = {F6F0EFFA-9270-42B0-9AC2-4E04FA188AB7}
 		{5752C385-402C-4C1E-8DE9-7352F075FDF8} = {E37B5E5D-8B3E-4A35-92A3-FCE0E9E222DF}
+		{E9AD62AE-A67E-47BD-911E-69EF38C8C1B8} = {4399B364-CD75-43EC-A002-FED794B76060}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4CECE159-E667-436A-813F-EA4C99DA4BFD}

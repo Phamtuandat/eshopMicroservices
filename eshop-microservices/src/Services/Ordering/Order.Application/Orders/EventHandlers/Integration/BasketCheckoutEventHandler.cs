@@ -16,11 +16,11 @@ namespace Ordering.Application.Orders.EventHandlers.Integration
     {
         public async Task Consume(ConsumeContext<BasketCheckoutEvent> context)
         {
-            // TODO: Create new order and start order fullfillment process
-            logger.LogInformation("Integration Event handled: {IntegrationEvent}", context.Message.GetType().Name);
+                // TODO: Create new order and start order fullfillment process
+                logger.LogInformation("Integration Event handled: {IntegrationEvent}", context.Message.GetType().Name);
 
-            var command = MapToCreateOrderCommand(context.Message);
-            await sender.Send(command);
+                var command = MapToCreateOrderCommand(context.Message);
+                await sender.Send(command);
         }
 
         private CreateOrderCommand MapToCreateOrderCommand(BasketCheckoutEvent message)

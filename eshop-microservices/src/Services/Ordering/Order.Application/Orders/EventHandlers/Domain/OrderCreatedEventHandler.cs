@@ -1,4 +1,5 @@
-﻿using MassTransit;
+﻿using BuildingBlocks.Messaging.Events;
+using MassTransit;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Microsoft.FeatureManagement;
@@ -21,7 +22,12 @@ namespace Ordering.Application.Orders.EventHandlers.Domain
             if (await featureManager.IsEnabledAsync("OrderFullfilment"))
             {
                 var orderCreatedIntegrationEvent = domainEvent.Order.ToOrderDto();
-                await publishEndpoint.Publish(orderCreatedIntegrationEvent, cancellationToken);
+                var checkedOutEvent = new CheckedOutEvent() { Success = true, 
+                    CustomerId = orderCreatedIntegrationEvent.CustomerId,
+                    Id = orderCreatedIntegrationEvent.Id,
+                    ErrorMessage = null
+                };
+                await publishEndpoint.Publish(checkedOutEvent, cancellationToken);
             }
         }
     }
