@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
+
 namespace Basket.API.Basket.GetBasket
 {
     public record GetBasketResponse(ShoppingCart Cart);
@@ -6,6 +8,7 @@ namespace Basket.API.Basket.GetBasket
     {
         public override void AddRoutes(IEndpointRouteBuilder app)
         {
+
             app.MapGet("/basket/{userName}", async (string username, ISender sender) =>
             {
                 var query = new GetBasketQuery(username);
@@ -17,7 +20,7 @@ namespace Basket.API.Basket.GetBasket
             .Produces<GetBasketResponse>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .WithSummary("Get basket By username")
-            .WithDescription("Get basket By username");
+            .WithDescription("Get basket By username").RequireAuthorization();
         }
     }
 }

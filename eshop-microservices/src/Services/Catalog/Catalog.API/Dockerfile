@@ -16,12 +16,6 @@ COPY . .
 WORKDIR "/src/src/Services/Catalog/Catalog.API"
 RUN dotnet build "./Catalog.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-# Generate the developer certificate
-RUN dotnet dev-certs https
-
-# Trust the developer certificate (Windows and macOS only)
-RUN dotnet dev-certs https --trust
-
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./Catalog.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false

@@ -12,11 +12,13 @@ namespace Catalog.API.Data
                 return;
 
             // Marten UPSERT will cater for existing records
-            session.Store<Product>(GetPreconfiguredProducts());
+            session.Store<Product>(_GetPreconfiguredProducts());
             await session.SaveChangesAsync();
         }
 
-        private static IEnumerable<Product> GetPreconfiguredProducts() => new List<Product>()
+        private static IEnumerable<Product> _GetPreconfiguredProducts()
+        {
+            return new List<Product>()
             {
                 new Product()
                 {
@@ -82,6 +84,6 @@ namespace Catalog.API.Data
                     Category = new List<string> { "Camera" }
                 }
             };
-
+        }
     }
 }
