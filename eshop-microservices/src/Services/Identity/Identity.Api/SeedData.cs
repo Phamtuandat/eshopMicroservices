@@ -131,7 +131,7 @@ namespace Identity.Api
                                 new Claim(JwtClaimTypes.GivenName, "Dat"),
                                 new Claim(JwtClaimTypes.FamilyName, "Pham"),
                                 new Claim(JwtClaimTypes.WebSite, "http://DiyDevblog.com"),
-                                new Claim("location", "somewhere")
+                                new Claim("userId", dat.Id)
                             }).Result;
                     if (!result.Succeeded)
                     {

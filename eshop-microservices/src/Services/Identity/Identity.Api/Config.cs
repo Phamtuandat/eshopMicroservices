@@ -1,4 +1,5 @@
 ﻿using Duende.IdentityServer.Models;
+using IdentityModel;
 
 namespace Identity.Api
 {
@@ -9,6 +10,7 @@ namespace Identity.Api
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
+              
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>
@@ -17,36 +19,62 @@ namespace Identity.Api
                 new ApiScope("read"),
                 new ApiScope("write"),
                 new ApiScope("offline_access"),
-
+                new ApiScope("catalog.api"),
+                new ApiScope("basket.api"),
+                new ApiScope("ordering.api"),
             };
 
         public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
-        {
-            new ApiResource("catalog.api"),
-            new ApiResource("basket.api"),
-            new ApiResource("order.api"),
-
-        };
+          {
+            new ApiResource("catalog.api", "Catalog API")
+            {
+                Scopes = { "catalog.api", "read", "write" },
+                ApiSecrets = { new Secret("secret".Sha256()) },
+                 UserClaims = { JwtClaimTypes.Role }
+            },
+            new ApiResource("basket.api", "Basket API")
+            {
+                Scopes = { "basket.api", "read", "write" },
+                ApiSecrets = { new Secret("secret".Sha256()) },
+                 UserClaims = { JwtClaimTypes.Role }
+            },
+            new ApiResource("ordering.api", "Ordering API")
+            {
+                Scopes = { "ordering.api", "read", "write" },
+                ApiSecrets = { new Secret("secret".Sha256()) },
+                 UserClaims = { JwtClaimTypes.Role }
+            },
+          };
 
         public static IEnumerable<Client> Clients =>
             new Client[]
             {
           
                 // interactive client using code flow + pkce
-                new Client
+              new Client
                 {
-                    ClientId = "client",
-                    ClientSecrets = { new Secret("49C1A7E1-0C79-4A89-A3D6-A37998FB86B0".Sha256()) },
-
+                    ClientId = "angular_spa",
                     AllowedGrantTypes = GrantTypes.Code,
-
-                    RedirectUris = { "https://localhost:44300/signin-oidc" },
-                    FrontChannelLogoutUri = "https://localhost:44300/signout-oidc",
-                    PostLogoutRedirectUris = { "https://localhost:44300/signout-callback-oidc" },
-
-                    AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "read", "write", "offline_access" }
-                },
+                    RequireClientSecret = false,
+                    RequirePkce = true,
+                    AllowedScopes =
+                    {
+                        "openid",
+                        "profile",
+                        "basket.api",
+                        "catalog.api",
+                        "ordering.api",
+                        "read",
+                        "write"
+                    },
+                    RedirectUris = { "http://localhost:4200/callback" },
+                    PostLogoutRedirectUris = { "http://localhost:4200/" },
+                    AllowedCorsOrigins = { "http://localhost:4200" },
+                    AllowAccessTokensViaBrowser = true,
+                    AccessTokenLifetime = 3600, // 1 hour
+                    
+                    
+                }
             };
     }
 }

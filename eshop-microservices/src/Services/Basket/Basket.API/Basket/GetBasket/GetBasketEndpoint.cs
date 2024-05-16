@@ -20,7 +20,7 @@ namespace Basket.API.Basket.GetBasket
             .Produces<GetBasketResponse>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .WithSummary("Get basket By username")
-            .WithDescription("Get basket By username").RequireAuthorization();
+            .WithDescription("Get basket By username");
         }
     }
 }

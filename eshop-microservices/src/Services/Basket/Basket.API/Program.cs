@@ -49,14 +49,13 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
     return handler;
 });
 
-builder.Services.AddAuthentication()
-    .AddJwtBearer(options =>
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("default", options =>
     {
-        options.Authority = "https://localhost:6065";
-        options.TokenValidationParameters.ValidateAudience = false;
+        options.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:4200");
     });
-builder.Services.AddAuthorization();
-
+});
 //Cross-Cutting Services
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
@@ -66,11 +65,9 @@ builder.Services.AddHealthChecks()
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 app.MapCarter();
+app.UseCors("default");
 app.UseExceptionHandler(options => { });
-app.UseAuthentication();
-app.UseAuthorization();
 app.UseHealthChecks("/health",
     new HealthCheckOptions
     {
