@@ -21,6 +21,7 @@ namespace Ordering.Application.Orders.EventHandlers.Domain
             if (await manager.IsEnabledAsync("OrderFullfilment"))
             {
                 var updatedOrderIntergrationEvent = domainEvent.Order.ToOrderDto();
+                
                 await endpoint.Publish(updatedOrderIntergrationEvent, cancellationToken);
             }
         }

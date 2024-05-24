@@ -10,16 +10,15 @@ namespace Ordering.Domain.ValueObjects
     public record ProductId
     {
         public Guid Value { get; }
-        private ProductId(Guid value) => Value = value;
+        private ProductId(Guid value) =>  Value = value;
+
         public static ProductId Of(Guid value)
         {
-            ArgumentNullException.ThrowIfNull(value);
-            if (value == Guid.Empty)
-            {
-                throw new DomainException("ProductId cannot be empty.");
-            }
-
+            ArgumentNullException.ThrowIfNull(value, "value");
+            if (value.Equals(Guid.Empty))   throw new DomainException("Id is required!");
             return new ProductId(value);
         }
     }
+
+
 }

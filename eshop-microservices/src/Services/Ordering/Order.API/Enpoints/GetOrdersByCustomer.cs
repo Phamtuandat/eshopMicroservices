@@ -7,7 +7,7 @@ namespace Ordering.API.Enpoints
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapGet("orders/customer/{customerId}", async (Guid customerId, ISender sender) =>
+            app.MapGet("orders/customer/{customerId}", async (string customerId, ISender sender) =>
             {
                 var result = await sender.Send(new GetOrdersByCustomerQuery(customerId));
                 var response = result.Orders;

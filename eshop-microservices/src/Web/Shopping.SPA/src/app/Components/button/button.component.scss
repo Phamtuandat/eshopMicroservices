@@ -1,0 +1,11 @@
+button {
+  padding: 4px 10px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    background-color: bisque;
+  }
+}

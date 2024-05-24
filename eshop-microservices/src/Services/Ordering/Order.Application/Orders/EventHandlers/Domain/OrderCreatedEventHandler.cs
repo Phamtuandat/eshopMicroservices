@@ -18,14 +18,15 @@ namespace Ordering.Application.Orders.EventHandlers.Domain
         public async Task Handle(OrderCreatedEvent domainEvent, CancellationToken cancellationToken)
         {
             logger.LogInformation("Domain Event handled: {DomainEvent}", domainEvent.GetType().Name);
-
+            var isEnable = await featureManager.IsEnabledAsync("OrderFullfilment");
             if (await featureManager.IsEnabledAsync("OrderFullfilment"))
             {
                 var orderCreatedIntegrationEvent = domainEvent.Order.ToOrderDto();
                 var checkedOutEvent = new CheckedOutEvent() { Success = true, 
                     CustomerId = orderCreatedIntegrationEvent.CustomerId,
                     Id = orderCreatedIntegrationEvent.Id,
-                    ErrorMessage = null
+                    ErrorMessage = null,
+                    
                 };
                 await publishEndpoint.Publish(checkedOutEvent, cancellationToken);
             }

@@ -14,9 +14,13 @@ namespace Discount.GRPC.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Coupon>().HasKey(x => x.Id);
+            modelBuilder.Entity<Coupon>().Property(x => x.Code).IsUnicode(true);
             modelBuilder.Entity<Coupon>().HasData(
-                new Coupon { Id = 1, ProductName = "IPhone X", Description = "IPhone Discount", Amount = 150 },
-                new Coupon { Id = 2, ProductName = "Samsung 10", Description = "Samsung Discount", Amount = 100 }
+                new Coupon { Id = Guid.NewGuid(), Description = "Newbie Discount", Amount = 150, Code = "NEWBIE24", Quantity= 100 },
+                new Coupon { Id = Guid.NewGuid(), Description = "Freeship Discount", Amount = 100, Code = "FREESHIP05", Quantity=100 }
+
                 );
         }
     }

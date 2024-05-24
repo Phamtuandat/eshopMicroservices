@@ -1,0 +1,17 @@
+<div class="container">
+  <form [formGroup]="searchForm">
+    <div class="content">
+      <div class="search-input">
+        <input
+          class="input-field"
+          type="text"
+          placeholder="Search"
+          formControlName="search"
+        />
+      </div>
+      <app-button type="submit" bgcolor="white" radius="0 7px 7px 0">
+        <mat-icon>search</mat-icon>
+      </app-button>
+    </div>
+  </form>
+</div>

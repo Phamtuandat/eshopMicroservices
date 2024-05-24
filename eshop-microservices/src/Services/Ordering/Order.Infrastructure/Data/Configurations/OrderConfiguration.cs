@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Ordering.Domain.Enums;
-using Ordering.Domain.Models;
-using Ordering.Domain.ValueObjects;
+﻿
 
 namespace Ordering.Infrastructure.Data.Configurations;
 public class OrderConfiguration : IEntityTypeConfiguration<Order>
@@ -15,10 +11,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
                         orderId => orderId.Value,
                         dbId => OrderId.Of(dbId));
 
-        builder.HasOne<Customer>()
-          .WithMany()
-          .HasForeignKey(o => o.CustomerId)
-          .IsRequired();
+       
 
         builder.HasMany(o => o.OrderItems)
             .WithOne()

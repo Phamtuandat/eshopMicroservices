@@ -25,13 +25,6 @@ public static class Extentions
                     host.Password(configuration["MessageBroker:Password"]);
                 });
                 configurator.ConfigureEndpoints(context);
-                configurator.UseMessageRetry(retryConfig =>
-                {
-                    retryConfig.Interval(3, TimeSpan.FromSeconds(5)); 
-                    retryConfig.Ignore<Exception>(); 
-                });
-
-                configurator.ConfigureEndpoints(context);
             });
         });
 

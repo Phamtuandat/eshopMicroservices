@@ -14,21 +14,8 @@ export class BasketComponent {
     private apiService: BasketService,
     private authService: AuthConfigService
   ) {}
-
   ngOnInit() {
     if (this.authService.hasValidAccessToken()) {
-      this.fetchData(this.authService.getToken());
     }
-  }
-
-  fetchData(token: string) {
-    this.apiService.getData(token).subscribe(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.error('Error fetching data: ', error);
-      }
-    );
   }
 }

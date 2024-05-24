@@ -1,14 +1,18 @@
 ﻿
+using Basket.API.Services;
+
 namespace Basket.API.Basket.DeleteBasket
 {
     public record DeleteBasketResponse(bool IsSuccess);
-    public class DeleteBasketEndpoint : ICarterModule
+    public class DeleteBasketEndpoint(IIdentityService identityService) : ICarterModule
     {
+        private readonly IIdentityService _identityService = identityService; 
         public void AddRoutes(IEndpointRouteBuilder app)
         {
             app.MapDelete("/basket, {userName}", async (ISender sender, string userName) =>
             {
-                var result = await sender.Send(new DeleteBasketCommand(userName));
+                var customer = _identityService.GetUserIdentity();
+                var result = await sender.Send(new DeleteBasketCommand(customer.CustomerId));
 
                 var response = result.Adapt<DeleteBasketResponse>();
 

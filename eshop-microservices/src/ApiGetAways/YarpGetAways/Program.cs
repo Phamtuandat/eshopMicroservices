@@ -37,8 +37,7 @@ builder.Services.AddAuthentication("Bearer")
             $"{"https://localhost:6065"}/.well-known/openid-configuration",
             new OpenIdConnectConfigurationRetriever(),
             new HttpDocumentRetriever() { RequireHttps = false }
-        )
-        };
+        )};
         // Enable detailed logging for diagnostics
         options.Events = new JwtBearerEvents
         {
@@ -59,7 +58,6 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("proxyPolicy", policy =>
     {
         policy.RequireAuthenticatedUser();
-        policy.RequireClaim(ClaimTypes.Role,"admin");
     });
 
 });

@@ -1,0 +1,11 @@
+.profile-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .profile-menu-btn {
+    font-size: large;
+    .mat-button:hover {
+      background-color: inherit !important; /* or specify the color you want */
+    }
+  }
+}

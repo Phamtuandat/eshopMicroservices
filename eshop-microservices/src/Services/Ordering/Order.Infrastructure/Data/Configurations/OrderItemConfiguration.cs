@@ -14,9 +14,6 @@ public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
                                    orderItemId => orderItemId.Value,
                                    dbId => OrderItemId.Of(dbId));
 
-        builder.HasOne<Product>()
-            .WithMany()
-            .HasForeignKey(oi => oi.ProductId);
 
         builder.Property(oi => oi.Quantity).IsRequired();
 

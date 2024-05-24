@@ -19,7 +19,7 @@
 
             var newOrder = Order.Create(
                     id: OrderId.Of(Guid.NewGuid()),
-                    customerId: CustomerId.Of(orderDto.CustomerId),
+                    customerId: orderDto.CustomerId,
                     orderName: OrderName.Of(orderDto.OrderName),
                     shippingAddress: shippingAddress,
                     billingAddress: billingAddress,
@@ -28,7 +28,7 @@
 
             foreach (var orderItemDto in orderDto.OrderItems)
             {
-                newOrder.Add(ProductId.Of(orderItemDto.ProductId), orderItemDto.Quantity, orderItemDto.Price);
+                newOrder.Add(orderItemDto.ProductId, orderItemDto.Quantity, orderItemDto.Price);
             }
             return newOrder;
         }

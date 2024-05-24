@@ -68,7 +68,7 @@ namespace Identity.Api
                         "write"
                     },
                     RedirectUris = { "http://localhost:4200/callback" },
-                    PostLogoutRedirectUris = { "http://localhost:4200/" },
+                    PostLogoutRedirectUris = { "http://localhost:4200" },
                     AllowedCorsOrigins = { "http://localhost:4200" },
                     AllowAccessTokensViaBrowser = true,
                     AccessTokenLifetime = 3600, // 1 hour

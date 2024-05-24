@@ -12,11 +12,7 @@ import { BasketComponent } from './basket/basket.component';
 })
 export class AppComponent implements OnInit {
   title = 'Shopping.SPA';
-  /**
-   *
-   */
+
   constructor(private authService: AuthConfigService) {}
-  ngOnInit(): void {
-    console.log(this.authService.getToken());
-  }
+  ngOnInit(): void {}
 }

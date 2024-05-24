@@ -1,15 +1,21 @@
 <mat-toolbar color="primary">
   <div ngClass="contaier">
     <div>
-      <span>My Application</span>
-      <button mat-button>Home</button>
-      <button mat-button>About</button>
-      <button mat-button>Contact</button>
+      <span>My Shop</span>
     </div>
-    <ng-container *ngIf="[!isLogged]">
+    <div class="appbar-search">
+      <app-searching-bar></app-searching-bar>
+    </div>
+    <ng-container *ngIf="!isLogged; else logoutBtn">
       <div>
         <button (click)="login()">Login</button>
       </div>
     </ng-container>
   </div>
 </mat-toolbar>
+
+<ng-template #logoutBtn>
+  <div>
+    <app-profile-menu></app-profile-menu>
+  </div>
+</ng-template>
