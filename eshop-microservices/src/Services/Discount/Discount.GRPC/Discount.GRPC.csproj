@@ -16,7 +16,8 @@
     <PackageReference Include="Carter" Version="8.1.0" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.62.0" />
     <PackageReference Include="Mapster" Version="7.4.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.5" />
+	  <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.5" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -27,9 +28,6 @@
 	    <Protobuf Include="Protos\discount.proto" GrpcServices="Server" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Discounts\GetDiscounts\" />
-      <Folder Include="Discounts\GetDiscountById\" />
-      <Folder Include="Discounts\UpdateDiscount\" />
       <Folder Include="DTOs\" />
     </ItemGroup>
     <ItemGroup>

@@ -54,29 +54,16 @@ export class AuthConfigService {
     return this.oauthService.hasValidAccessToken();
   }
 
-  getIdentity(): User {
-    var user: User = {
-      email: '',
-      id: '',
-      name: '',
-      username: '',
-    };
+  getIdentity(): Observable<object> | null {
+    var userInfor: Observable<object> | null = null;
     var token = this.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     var userEnpoint = this.oauthService.userinfoEndpoint;
     if (userEnpoint) {
-      this.http
-        .get(userEnpoint, { headers })
-        .pipe()
-        .subscribe((value: any) => {
-          user.email = value['email'];
-          user.id = value['sub'];
-          user.name = value['name'];
-          user.username = value['preferred_username'];
-        });
+      userInfor = this.http.get(userEnpoint, { headers }).pipe();
     }
-
-    return user;
+    // const claims = this.oauthService.get();
+    return userInfor;
   }
 
   getOauthEvents(): Observable<OAuthEvent> {

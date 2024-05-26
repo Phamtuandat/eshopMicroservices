@@ -14,5 +14,7 @@ export class AppComponent implements OnInit {
   title = 'Shopping.SPA';
 
   constructor(private authService: AuthConfigService) {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.authService.getToken());
+  }
 }

@@ -24,8 +24,12 @@ export class ProfileMenuComponent implements OnInit {
   };
   ngOnInit(): void {
     if (this.oauthService.hasValidAccessToken()) {
-      var user = this.oauthService.getIdentity();
-      this.userInfor = user;
+      this.oauthService.getIdentity()?.subscribe((user: any) => {
+        this.userInfor.email = user['email'];
+        this.userInfor.id = user['userId'];
+        this.userInfor.name = user['name'];
+        this.userInfor.username = user['preferred_username'];
+      });
     } else {
       this.logout();
     }
