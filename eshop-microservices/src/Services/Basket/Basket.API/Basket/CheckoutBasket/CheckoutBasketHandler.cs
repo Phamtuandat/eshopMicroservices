@@ -20,26 +20,39 @@ public class CheckoutBasketCommandValidator
 }
 
 public class CheckoutBasketCommandHandler
-    (IBasketRepository repository, IPublishEndpoint publishEndpoint)
+    (IBasketRepository repository, IPublishEndpoint publishEndpoint, DiscountProtoService.DiscountProtoServiceClient discountProto)
     : ICommandHandler<CheckoutBasketCommand, CheckoutBasketResult>
 {
     public async Task<CheckoutBasketResult> Handle(CheckoutBasketCommand command, CancellationToken cancellationToken)
     {
 
         var basket = await repository.GetBasket(command.BasketCheckoutDto.CustomerId, cancellationToken);
-        if (basket == null)
-        {
-            return new CheckoutBasketResult(false);
-        }
+        if (basket == null) return new CheckoutBasketResult(false);
+        
 
         var eventMessage = command.BasketCheckoutDto.Adapt<BasketCheckoutEvent>();
-        eventMessage.TotalPrice = basket.TotalPrice;
         eventMessage.basketCheckOutItems = basket.Items.Adapt<List<BasketCheckOutItem>>();
-
+        if (command.BasketCheckoutDto.CouponCode != null)
+            await _DeductDiscount(eventMessage, cancellationToken);
+        eventMessage.basketCheckOutItems = basket.Items.Adapt<List<BasketCheckOutItem>>();
         await publishEndpoint.Publish(eventMessage, cancellationToken);
 
-        
+
 
         return new CheckoutBasketResult(true);
     }
+
+    private async Task _DeductDiscount(BasketCheckoutEvent cart, CancellationToken cancellationToken)
+    {
+        var coupon = await discountProto.GetDiscountAsync(new GetDiscountRequest { Code = cart.CouponCode }, cancellationToken: cancellationToken);
+        if(coupon.Code == "No Discount") throw new Exception("Coupon is invalid!");
+        if(coupon.Code == "Coupon is out of stock") throw new Exception($"{coupon.Code} is out of stock");
+        decimal discountPercentage = (decimal)coupon.DiscountPercentage / 100;
+        foreach (var item in cart.basketCheckOutItems)
+        {
+            decimal discountAmount = discountPercentage * item.Price;
+            item.Price -= discountAmount;   
+        }
+    }
 }
+

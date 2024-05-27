@@ -19,7 +19,8 @@ namespace Ordering.Application.Extensions
                 BillingAddress: new AddressDto(order.BillingAddress.FirstName, order.BillingAddress.LastName, order.BillingAddress.EmailAddress!, order.BillingAddress.AddressLine, order.BillingAddress.Country, order.BillingAddress.State, order.BillingAddress.ZipCode),
                 Payment: new PaymentDto(order.Payment.CardName!, order.Payment.CardNumber, order.Payment.Expiration, order.Payment.CVV, order.Payment.PaymentMethod),
                 Status: order.Status,
-                OrderItems: order.OrderItems.Select(oi => new OrderItemDto(oi.OrderId.Value, oi.ProductId, oi.Quantity, oi.Price)).ToList()
+                OrderItems: order.OrderItems.Select(oi => new OrderItemDto(oi.OrderId.Value, oi.ProductId, oi.Quantity, oi.Price)).ToList(),
+                CouponCode: order.CouponCode
             ));
         }
         public static OrderDto ToOrderDto(this Order order)
@@ -36,7 +37,8 @@ namespace Ordering.Application.Extensions
                     BillingAddress: new AddressDto(order.BillingAddress.FirstName, order.BillingAddress.LastName, order.BillingAddress.EmailAddress!, order.BillingAddress.AddressLine, order.BillingAddress.Country, order.BillingAddress.State, order.BillingAddress.ZipCode),
                     Payment: new PaymentDto(order.Payment.CardName!, order.Payment.CardNumber, order.Payment.Expiration, order.Payment.CVV, order.Payment.PaymentMethod),
                     Status: order.Status,
-                    OrderItems: order.OrderItems.Select(oi => new OrderItemDto(oi.OrderId.Value, oi.ProductId, oi.Quantity, oi.Price)).ToList()
+                    OrderItems: order.OrderItems.Select(oi => new OrderItemDto(oi.OrderId.Value, oi.ProductId, oi.Quantity, oi.Price)).ToList(),
+                    CouponCode: order.CouponCode
                 );
         }
     }

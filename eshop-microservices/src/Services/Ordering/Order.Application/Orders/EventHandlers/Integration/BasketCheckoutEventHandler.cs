@@ -38,7 +38,8 @@ namespace Ordering.Application.Orders.EventHandlers.Integration
                 BillingAddress: addressDto,
                 Payment: paymentDto,
                 Status: Ordering.Domain.Enums.OrderStatus.Pending,
-                OrderItems: orderItems);
+                OrderItems: orderItems,
+                CouponCode: message.CouponCode);
 
             return new CreateOrderCommand(orderDto);
         }

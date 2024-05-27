@@ -15,7 +15,7 @@ namespace Discount.GRPC.Discounts.UpdateDiscount
             if (coupon != null)
             {
                 coupon.Quantity = request.Coupon.Quantity;
-                coupon.Amount = request.Coupon.Amount;
+                coupon.DiscountPercentage = request.Coupon.DiscountPercentage;
                 coupon.Description = request.Coupon.Description;
                 coupon.Code = request.Coupon.Code;
                 _context.Update(coupon);

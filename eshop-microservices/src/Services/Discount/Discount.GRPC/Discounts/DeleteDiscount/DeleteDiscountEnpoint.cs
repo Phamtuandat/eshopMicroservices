@@ -7,7 +7,7 @@ namespace Discount.GRPC.Discounts.DeleteDiscount
     public record DeleteDiscountResponse(bool IsSuccess);
     public class DeleteDiscountEnpoint : ICarterModule
     {
-        public void AddRoutes(IEndpointRouteBuilder app)
+        public void AddRoutes(IEndpointRouteBuilder app)    
         {
             app.MapDelete("discount", async (Guid id, ISender sender) =>
             {

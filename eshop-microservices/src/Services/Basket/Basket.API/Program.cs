@@ -120,10 +120,10 @@ builder.Services.AddHealthChecks()
 
 var app = builder.Build();
 
-app.MapCarter();
 app.UseCors("default");
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapCarter();
 app.UseExceptionHandler(options => { });
 app.UseHealthChecks("/health",
     new HealthCheckOptions

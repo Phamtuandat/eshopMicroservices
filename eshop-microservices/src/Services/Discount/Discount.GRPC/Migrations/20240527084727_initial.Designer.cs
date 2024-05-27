@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Discount.GRPC.Migrations
 {
     [DbContext(typeof(DiscountContext))]
-    [Migration("20240525112639_initial")]
+    [Migration("20240527084727_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -26,9 +26,6 @@ namespace Discount.GRPC.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Code")
                         .IsRequired()
                         .IsUnicode(true)
@@ -37,6 +34,9 @@ namespace Discount.GRPC.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("DiscountPercentage")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("INTEGER");
@@ -48,18 +48,18 @@ namespace Discount.GRPC.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ad128998-7a07-4b4e-b3a5-3007f2e880bd"),
-                            Amount = 150,
+                            Id = new Guid("0fd362d0-04db-4d07-87b1-041ff2ffb283"),
                             Code = "NEWBIE24",
                             Description = "Newbie Discount",
+                            DiscountPercentage = 15,
                             Quantity = 100
                         },
                         new
                         {
-                            Id = new Guid("66694781-00f8-4aa3-a107-abccfcb77163"),
-                            Amount = 100,
+                            Id = new Guid("a5e8e538-fa7f-4774-be47-220a336e2e75"),
                             Code = "FREESHIP05",
                             Description = "Freeship Discount",
+                            DiscountPercentage = 10,
                             Quantity = 100
                         });
                 });

@@ -22,11 +22,11 @@ namespace Ordering.Application.Orders.EventHandlers.Domain
             if (await featureManager.IsEnabledAsync("OrderFullfilment"))
             {
                 var orderCreatedIntegrationEvent = domainEvent.Order.ToOrderDto();
-                var checkedOutEvent = new CheckedOutEvent() { Success = true, 
+                var checkedOutEvent = new CheckedOutEvent() { Success = true,
                     CustomerId = orderCreatedIntegrationEvent.CustomerId,
                     Id = orderCreatedIntegrationEvent.Id,
                     ErrorMessage = null,
-                    
+                    CouponCode = orderCreatedIntegrationEvent.CouponCode,
                 };
                 await publishEndpoint.Publish(checkedOutEvent, cancellationToken);
             }

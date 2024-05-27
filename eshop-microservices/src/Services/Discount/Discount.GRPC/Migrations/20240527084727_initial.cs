@@ -19,7 +19,7 @@ namespace Discount.GRPC.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
-                    Amount = table.Column<int>(type: "INTEGER", nullable: false),
+                    DiscountPercentage = table.Column<int>(type: "INTEGER", nullable: false),
                     Quantity = table.Column<int>(type: "INTEGER", nullable: false),
                     Code = table.Column<string>(type: "TEXT", nullable: false)
                 },
@@ -30,11 +30,11 @@ namespace Discount.GRPC.Migrations
 
             migrationBuilder.InsertData(
                 table: "Coupons",
-                columns: new[] { "Id", "Amount", "Code", "Description", "Quantity" },
+                columns: new[] { "Id", "Code", "Description", "DiscountPercentage", "Quantity" },
                 values: new object[,]
                 {
-                    { new Guid("66694781-00f8-4aa3-a107-abccfcb77163"), 100, "FREESHIP05", "Freeship Discount", 100 },
-                    { new Guid("ad128998-7a07-4b4e-b3a5-3007f2e880bd"), 150, "NEWBIE24", "Newbie Discount", 100 }
+                    { new Guid("0fd362d0-04db-4d07-87b1-041ff2ffb283"), "NEWBIE24", "Newbie Discount", 15, 100 },
+                    { new Guid("a5e8e538-fa7f-4774-be47-220a336e2e75"), "FREESHIP05", "Freeship Discount", 10, 100 }
                 });
         }
 

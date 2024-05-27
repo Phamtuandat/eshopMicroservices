@@ -4,9 +4,9 @@ using MassTransit;
 
 namespace Basket.API.Basket.EventHandlers
 {
-    public class CreatedOrderHandler(ISender sender, ILogger<CreatedOrderHandler> logger) : IConsumer<CheckedOutEvent>
+    public class CreatedOrderEventHandler(ISender sender, ILogger<CreatedOrderEventHandler> logger) : IConsumer<CheckedOutEvent>
     {
-        private readonly ILogger<CreatedOrderHandler> _logger = logger;
+        private readonly ILogger<CreatedOrderEventHandler> _logger = logger;
         private readonly ISender _sender = sender;
         public async Task Consume(ConsumeContext<CheckedOutEvent> context)
         {

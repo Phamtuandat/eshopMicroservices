@@ -23,7 +23,7 @@ namespace Basket.API.Basket.DeleteBasket
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status404NotFound)
             .WithSummary("Delete Basket")
-            .WithDescription("Delete Basket");
+            .WithDescription("Delete Basket").RequireAuthorization("default");
         }
     }
 }

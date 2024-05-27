@@ -24,6 +24,7 @@
                     shippingAddress: shippingAddress,
                     billingAddress: billingAddress,
                     payment: Payment.Of(orderDto.Payment.CardName, orderDto.Payment.CardNumber, orderDto.Payment.Expiration, orderDto.Payment.Cvv, orderDto.Payment.PaymentMethod)
+                    , coupon: orderDto.CouponCode
                     );
 
             foreach (var orderItemDto in orderDto.OrderItems)

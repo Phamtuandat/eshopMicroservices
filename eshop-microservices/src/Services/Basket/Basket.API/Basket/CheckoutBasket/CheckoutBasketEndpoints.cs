@@ -26,6 +26,8 @@ public class CheckoutBasketEndpoints(IIdentityService identityService) : ICarter
         .Produces<CheckoutBasketResponse>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Checkout Basket")
-        .WithDescription("Checkout Basket");
+        .WithDescription("Checkout Basket")
+        .RequireAuthorization("default");
+
     }
 }

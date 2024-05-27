@@ -11,6 +11,7 @@ namespace BuildingBlocks.Messaging.Events
         public Guid Id { get; set; } = default!;
         public string CustomerId { get; set; } = default!;
         public bool Success { get; set; }
+        public string? CouponCode { get; set; }
         public string? ErrorMessage { get; set; }
     }
 }

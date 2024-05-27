@@ -3,12 +3,13 @@ using Carter;
 using Discount.Grpc.Services;
 using Discount.GRPC.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Reflection;
+using BuildingBlocks.Messaging.MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,8 @@ builder.Services.AddMediatR(config =>
     config.AddOpenBehavior(typeof(ValidationBehavior<,>));
     config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
+
+builder.Services.AddMessageBroker(builder.Configuration, assembly);
 
 builder.Services.AddAuthentication().AddJwtBearer("Bearer", options =>
 {
@@ -65,13 +68,14 @@ builder.Services.AddAuthentication().AddJwtBearer("Bearer", options =>
         }
     };
 });
+
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("admin", policy =>
     {
         policy.RequireAuthenticatedUser();
+        policy.RequireRole("admin");
     });
-
 });
 var app = builder.Build();
 
@@ -79,6 +83,12 @@ var app = builder.Build();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.Use(async (context, next) =>
+{
+    var user = context.User;
+
+    next.Invoke(context);
+});
 app.MapCarter();
 // Configure the HTTP request pipeline.
 app.MapGrpcService<DiscountProtoService>();
@@ -86,10 +96,4 @@ app.Logger.LogInformation("Database is migrating!");
 app.UseMigration();
 app.Logger.LogInformation("Database migrated!");
 app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
-app.Use(async (context, next) =>
-{
-    var user = context.User;
-
-    next.Invoke(context);
-});
 app.Run();
