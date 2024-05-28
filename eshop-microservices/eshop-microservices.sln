@@ -43,6 +43,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YarpGetAways", "src\ApiGetA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Api", "src\Services\Identity\Identity.Api\Identity.Api.csproj", "{81284157-0F40-4CD7-B1D1-07C2DE0D08A4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Background", "Background", "{F90D26AB-F12D-4337-9B4A-F7DFE24F6121}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Background.API", "src\Services\Background\Background.API\Background.API.csproj", "{C4AB8858-E484-451C-A8D5-FAE72888A16F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +101,10 @@ Global
 		{81284157-0F40-4CD7-B1D1-07C2DE0D08A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81284157-0F40-4CD7-B1D1-07C2DE0D08A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81284157-0F40-4CD7-B1D1-07C2DE0D08A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4AB8858-E484-451C-A8D5-FAE72888A16F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4AB8858-E484-451C-A8D5-FAE72888A16F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4AB8858-E484-451C-A8D5-FAE72888A16F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4AB8858-E484-451C-A8D5-FAE72888A16F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -118,6 +126,8 @@ Global
 		{E9AD62AE-A67E-47BD-911E-69EF38C8C1B8} = {4399B364-CD75-43EC-A002-FED794B76060}
 		{C2ACF342-0854-4A6A-8F44-1A819614573A} = {23781830-2A6D-448B-A16C-04FAC77A21A6}
 		{81284157-0F40-4CD7-B1D1-07C2DE0D08A4} = {E9AD62AE-A67E-47BD-911E-69EF38C8C1B8}
+		{F90D26AB-F12D-4337-9B4A-F7DFE24F6121} = {4399B364-CD75-43EC-A002-FED794B76060}
+		{C4AB8858-E484-451C-A8D5-FAE72888A16F} = {F90D26AB-F12D-4337-9B4A-F7DFE24F6121}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4CECE159-E667-436A-813F-EA4C99DA4BFD}
