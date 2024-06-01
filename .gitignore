@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/eshop-microservices/src/Services/Background/Background.API/appsettings.Development.json
