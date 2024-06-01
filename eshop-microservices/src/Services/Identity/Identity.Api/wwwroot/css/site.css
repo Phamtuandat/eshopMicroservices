@@ -1,39 +1,84 @@
-﻿.welcome-page .logo {
-  width: 64px;
+.view-post .post-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
-.icon-banner {
-  width: 32px;
+.personal-profle {
+  border-radius: 20px;
+  overflow: hidden;
+}
+.personal-profle h4 {
+  color: black;
+  padding: 10px;
+}
+.personal-profle .personal-profle-content {
+  padding: 20px;
 }
 
-.body-container {
-  margin-top: 60px;
-  padding-bottom: 40px;
+.bg-personal-image {
+  background: url("/Contents/Image/personal.jpg");
+  background-position: center;
+  padding-right: -1.5rem;
 }
 
-.welcome-page li {
-  list-style: none;
-  padding: 4px;
+.account {
+  padding: 20px;
+}
+.account h1 {
+  color: black;
 }
 
-.logged-out-page iframe {
-  display: none;
-  width: 0;
-  height: 0;
+.phone {
+  padding: 0 10px;
+  min-height: 600px;
+}
+.phone .phone-form {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+}
+.phone .phone-form .phone-form-header {
+  flex: 1;
+}
+.phone .phone-form .phone-form-input {
+  flex: 2;
 }
 
-.grants-page .card {
-  margin-top: 20px;
-  border-bottom: 1px solid lightgray;
+.connection {
+  padding: 0 10px;
+  min-height: 600px;
 }
-.grants-page .card .card-title {
-  font-size: 120%;
-  font-weight: bold;
+
+.bg-connection-image {
+  background: url("/Contents/Image/connection.webp");
+  background-position: center;
+  background-size: cover;
 }
-.grants-page .card .card-title img {
-  width: 100px;
-  height: 100px;
+
+.repassword {
+  padding: 20px 20px !important;
+  min-height: 600px;
 }
-.grants-page .card label {
-  font-weight: bold;
+
+.bg-repassword-image {
+  background: url("/Contents/Image/lock.webp");
+  background-position: center;
+  background-size: cover;
+}
+
+.bg-register-image, .bg-login-image {
+  background: url("/Contents/Image/lock.webp") !important;
+  background-position: center;
+}
+
+.form-control-register {
+  margin: 14px 0;
+}
+
+.register-btn {
+  margin-top: 14px;
 }

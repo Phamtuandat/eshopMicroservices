@@ -17,10 +17,13 @@ public class DiscountProtoService
             .FirstOrDefaultAsync(x => x.Code == request.Code );
 
         if (coupon is null)
-            coupon = new Coupon { Code = "No Discount", DiscountPercentage = 0, Description = "No Discount Desc" };
+        {
 
-        if (coupon.Quantity == 0)
+            coupon = new Coupon { Code = "No Discount", DiscountPercentage = 0, Description = "No Discount Desc" };
+        }else if (coupon.Quantity == 0)
+        {
             coupon = new Coupon { Code = "Coupon is out of stock", DiscountPercentage = 0, Description = "Coupon is out of stock" };
+        }
 
         logger.LogInformation("Discount is retrieved for Code  : {productName}, Amount : {amount}", coupon.Code, coupon.DiscountPercentage);
 

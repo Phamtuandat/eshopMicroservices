@@ -1,4 +1,5 @@
 ﻿using Identity.Api.Data;
+using Identity.Api.Enums;
 using Identity.Api.Models;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity;
@@ -15,28 +16,28 @@ namespace Identity.Api
             using (var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                context.Database.Migrate();
+                await context.Database.MigrateAsync();
 
                 var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
                 var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-                var admin = await roleMgr.FindByNameAsync("admin");
-                var staff = await roleMgr.FindByNameAsync("staff");
-                var user = await roleMgr.FindByNameAsync("user");
+                var admin = await roleMgr.FindByNameAsync(RoleNames.Administrator);
+                var staff = await roleMgr.FindByNameAsync(RoleNames.Staff);
+                var user = await roleMgr.FindByNameAsync(RoleNames.User);
                 if (admin == null)
                 {
-                    await roleMgr.CreateAsync(new IdentityRole("admin"));
+                    await roleMgr.CreateAsync(new IdentityRole(RoleNames.Administrator));
                     Log.Debug("admin role is created");
                 }
                 if (staff == null)
                 {
-                    await roleMgr.CreateAsync(new IdentityRole("staff"));
+                    await roleMgr.CreateAsync(new IdentityRole(RoleNames.Staff));
                     Log.Debug("staff role is created");
 
                 }
                 if (user == null) 
                 {
-                    await roleMgr.CreateAsync(new IdentityRole("user"));
+                    await roleMgr.CreateAsync(new IdentityRole(RoleNames.User));
                     Log.Debug("user role is created");
 
                 }
@@ -62,7 +63,7 @@ namespace Identity.Api
                                 new Claim(JwtClaimTypes.WebSite, "http://alice.com"),
                             }).Result;
 
-                    await userMgr.AddToRoleAsync(alice,"staff");
+                    await userMgr.AddToRoleAsync(alice,RoleNames.Staff);
                     if (!result.Succeeded)
                     {
                         throw new Exception(result.Errors.First().Description);
@@ -97,7 +98,7 @@ namespace Identity.Api
                                 new Claim("location", "somewhere")
                             }).Result;
 
-                    await userMgr.AddToRoleAsync(bob, "staff");
+                    await userMgr.AddToRoleAsync(bob, RoleNames.Staff);
 
                     if (!result.Succeeded)
                     {
@@ -140,7 +141,7 @@ namespace Identity.Api
                     Log.Debug("Dat created");
 
                    
-                    await userMgr.AddToRoleAsync(dat, "admin");
+                    await userMgr.AddToRoleAsync(dat, RoleNames.Administrator);
                 }
                 else
                 {

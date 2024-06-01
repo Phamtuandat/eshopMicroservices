@@ -13,6 +13,9 @@ services:
   orderdb:
     image: mcr.microsoft.com/mssql/server
 
+  hangfiredb:
+    image: mcr.microsoft.com/mssql/server
+
   messagebroker:
     image: rabbitmq:management
 
@@ -52,9 +55,19 @@ services:
       context: .
       dockerfile: src/Services/Identity/Identity.Api/Dockerfile
 
+  
+
+  background.api:
+    image: ${DOCKER_REGISTRY-}backgroundapi
+    build:
+      context: .
+      dockerfile: src/Services/Background/Background.API/Dockerfile
+
 volumes:
   postgres_catalog:
   postgres_basket:
+
+
 
 
 

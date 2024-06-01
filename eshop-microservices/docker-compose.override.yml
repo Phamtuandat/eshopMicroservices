@@ -45,10 +45,19 @@ services:
     container_name: orderdb
     environment:
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=SwN12345678
+      - SA_PASSWORD=Phamdat11a1
     restart: always
     ports:
       - "1433:1433"
+
+  hangfiredb:
+    container_name: hangfiredb
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Phamdat11a1
+    restart: always
+    ports:
+      - "1434:1434"
 
   distributedcache:
     container_name: distributedcache
@@ -126,11 +135,11 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
-      - ConnectionStrings__Database=Server=orderdb;Database=OrderDb;User Id=sa;Password=SwN12345678;Encrypt=False;TrustServerCertificate=True
+      - ConnectionStrings__Database=Server=orderdb;Database=OrderDb;User Id=sa;Password=Phamdat11a1;Encrypt=False;TrustServerCertificate=True
       - MessageBroker__Host=amqp://ecommerce-mq:5672
       - MessageBroker__UserName=guest
       - MessageBroker__Password=guest
-      - FeatureManagement__OrderFullfilment=false
+      - FeatureManagement__OrderFullfilment=true
     depends_on:
       - orderdb
       - messagebroker
@@ -146,9 +155,40 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
+      - MessageBroker__Host=amqp://ecommerce-mq:5672
+      - MessageBroker__UserName=guest
+      - MessageBroker__Password=guest
     ports:
       - "6005:8080"
       - "6065:8081"
+    depends_on:
+      - messagebroker
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+  background.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__HangfireConnection=Server=hangfiredb;Database=hangfireDb;User Id=sa;Password=Phamdat11a1;Encrypt=False;TrustServerCertificate=True
+      - MessageBroker__Host=amqp://ecommerce-mq:5672
+      - MessageBroker__UserName=guest
+      - MessageBroker__Password=guest
+      - SMTP_SERVER=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_SENDER_NAME=Dev Shop
+      - SMTP_SENDER_EMAIL=phamtuandat150197@example.com
+      - SMTP_USERNAME=phamtuandat150197@gmail.com
+      - SMTP_PASSWORD=miif dvru venz yvht
+      - SMTP_ENABLE_SSL=true
+    ports:
+      - "6006:8080"
+      - "6066:8081"
+    depends_on:
+      - hangfiredb
+      - messagebroker
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro

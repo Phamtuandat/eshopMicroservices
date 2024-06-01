@@ -45,7 +45,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Api", "src\Service
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Background", "Background", "{F90D26AB-F12D-4337-9B4A-F7DFE24F6121}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Background.API", "src\Services\Background\Background.API\Background.API.csproj", "{C4AB8858-E484-451C-A8D5-FAE72888A16F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Background.API", "src\Services\Background\Background.API\Background.API.csproj", "{C4AB8858-E484-451C-A8D5-FAE72888A16F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using System.Runtime.InteropServices;
 
 namespace BuildingBlocks.Messaging.MassTransit;
 public static class Extentions

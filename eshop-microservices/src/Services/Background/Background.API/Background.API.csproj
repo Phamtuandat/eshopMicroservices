@@ -6,14 +6,28 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..\..\..</DockerfileContext>
+    <UserSecretsId>8d2fe616-d0e5-4cf8-a148-5112ec00daa7</UserSecretsId>
+    <DockerComposeProjectPath>..\..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Hangfire.AspNetCore" Version="1.8.12" />
     <PackageReference Include="Hangfire.Core" Version="1.8.12" />
     <PackageReference Include="Hangfire.SqlServer" Version="1.8.12" />
+    <PackageReference Include="MailKit" Version="4.6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.6" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks.Messaging\BuildingBlocks.Messaging.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\EmailTemplates\UserRegisterConfirm.html" />
   </ItemGroup>
 
 </Project>

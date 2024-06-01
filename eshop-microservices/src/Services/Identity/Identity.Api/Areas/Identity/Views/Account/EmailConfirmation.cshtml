@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Email Confirmation";
+}
+
+<h1>Email Confirmation</h1>
+
+@if (ViewBag.Email != null && ViewBag.Username != null)
+{
+    <h4>Thank you, @ViewBag.Username, your email (@ViewBag.Email) has been confirmed.</h4>
+
+    <p>
+        Now, you can close the browser!
+    </p>
+}
+else
+{
+    <p>Invalid confirmation link.</p>
+}

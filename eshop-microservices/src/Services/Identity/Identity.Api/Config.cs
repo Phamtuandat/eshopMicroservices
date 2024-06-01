@@ -72,8 +72,6 @@ namespace Identity.Api
                     AllowedCorsOrigins = { "http://localhost:4200" },
                     AllowAccessTokensViaBrowser = true,
                     AccessTokenLifetime = 3600, // 1 hour
-                    
-                    
                 }
             };
     }
