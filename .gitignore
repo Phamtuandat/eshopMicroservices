@@ -397,3 +397,5 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 /eshop-microservices/src/Services/Background/Background.API/appsettings.Development.json
+/eshop-microservices/.env
+/eshop-microservices/docker-compose.override.yml
