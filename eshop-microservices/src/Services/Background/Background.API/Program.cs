@@ -3,7 +3,6 @@ using BuildingBlocks.Messaging.MassTransit;
 using Background.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Background.API.Settings;
-using Microsoft.Extensions.Configuration;
 using Background.API.Services;
 
 
@@ -29,6 +28,5 @@ using (var scope = app.Services.CreateScope())
     hangfireDbContext.Database.Migrate();
 }
 app.MapGet("/", () =>  BackgroundJob.Enqueue(() =>  Console.WriteLine("Hello world")));
-
 
 app.Run();

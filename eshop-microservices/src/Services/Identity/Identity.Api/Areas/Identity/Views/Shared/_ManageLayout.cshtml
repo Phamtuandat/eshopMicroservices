@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="manage">
+
+    <div class="manage-appbar">
+        <ul>
+            @RenderSection("Sidebar", false)
+        </ul>
+    </div>
+
+    <div class="manage-content">
+        @RenderBody()
+    </div>
+
+</div>
+@RenderSection("Scripts", false);

@@ -2,3 +2,13 @@
 @import "./navbar";
 @import "./viewpost";
 @import "./usermanager";
+@import "./error";
+
+
+li{
+    list-style: none;
+}
+
+#content {
+    flex: 1
+}

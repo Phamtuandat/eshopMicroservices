@@ -11,7 +11,7 @@ namespace Identity.Api.Areas.Identity.Models.Account.Register
 
 
         [Required]
-        [StringLength(100, MinimumLength = 2)]
+        [StringLength(100, MinimumLength = 6)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

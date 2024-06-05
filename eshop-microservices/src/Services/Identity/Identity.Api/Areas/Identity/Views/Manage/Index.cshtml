@@ -1,0 +1,21 @@
+﻿@inject AppbarService _appbarService;
+@inject UserManager<ApplicationUser> userMg;
+
+<div class="d-flex homepage">
+    <div class="header">
+
+    <h2>
+        Welcome, @userMg.GetUserName(User)
+    </h2>
+    <p class="desc">
+        Manage your info, privacy, and security to make Google work better for you.
+    </p>
+    </div>
+</div>
+
+@section Sidebar{
+    @Html.Raw(_appbarService.RenderHtml())
+}
+@{
+    _appbarService.SetActive("Manage", "Index", "Identity");
+}

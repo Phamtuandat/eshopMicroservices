@@ -1,0 +1,32 @@
+﻿@{
+    var message = TempData["Message"] as string;
+}
+@if (!String.IsNullOrEmpty(message))
+{
+
+    <div class="alert alert-warning alert-dismissible fade show" style="position:absolute; right: 0; top: 70px" role="alert">
+        @message
+        <button type="button" class="btn btn-close" id="closeBtn" data-dismiss="alert">
+            <span aria-hidden="true">
+                &times;
+            </span>
+        </button>
+    </div>
+}
+
+<script type="text/javascript">
+    function AutoCloseAlert() {
+        var closeBtn = document.getElementById("closeBtn");
+        if (closeBtn) {
+
+            setTimeout(function () {
+
+                closeBtn.click();
+            }, 4000); // 4000 milliseconds = 4 seconds
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        AutoCloseAlert();
+    });
+</script>

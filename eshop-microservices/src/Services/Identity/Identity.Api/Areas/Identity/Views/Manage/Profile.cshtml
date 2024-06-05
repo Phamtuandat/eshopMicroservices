@@ -1,0 +1,100 @@
+﻿@model UserProfileViewModel
+@inject AppbarService _appbarService;
+@{
+    var title = "Personal Info";
+}
+
+
+<partial name="_AlertMessage" />
+<div class="header">
+    <h2>
+        @title
+    </h2>
+    <p class="desc">
+
+        Info about you and your preferences across Google services
+    </p>
+</div>
+<div class="info">
+    <div class="info-basic info-item">
+        <div class="info-basic-header">
+            <h5>
+                Basic Info
+            </h5>
+            <p>
+                Some info may be visible to other people using DevShop services.
+            </p>
+        </div>
+        <div class="info-basic-content">
+            <a class="basic-picture item d-flex" asp-action="EditProfilePicture">
+                <span class="fieldname">
+                    Profile Picture
+                </span>
+                <span class="context">
+                    <span>
+                        Profile picture help you personalize profile
+                    </span>
+                </span>
+                <div>
+                    <img src="@Model?.ProfilePicture" class="profile-picture" alt="Profile picture" />
+                </div>
+            </a>
+            <a class="name item d-flex " asp-action="ChangeName">
+                <span class="fieldname">
+                    Name
+                </span>
+                <span class="context">
+                    @Model.FirstName @Model.LastName
+                </span>
+                <div>
+                </div>
+            </a>
+            <a class=" birthday item d-flex ">
+                <span class="fieldname">
+                    Brithday
+                </span>
+                <span class="context">
+                    <p>
+                        @Model.Birthday
+                    </p>
+                </span>
+                <div>
+                </div>
+            </a>
+            <a class="Gender item d-flex ">
+                <span class="fieldname">
+                    Gender
+                </span>
+                <span class="context">
+                    <p>
+                        @Model.Gender.ToString()
+                    </p>
+                </span>
+                <div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="info-contact  info-item">
+        <div>
+            <h5>
+                Contact Info
+            </h5>
+            <p>
+                Some info may be visible to other people using DevShop services.
+            </p>
+        </div>
+    </div>
+    <div class="infor-address  info-item">
+        <h5>
+            Address
+        </h5>
+    </div>
+</div>
+@section Sidebar {
+    @Html.Raw(_appbarService.RenderHtml())
+}
+@{
+    _appbarService.SetActive("Manage", "Profile", "Identity");
+}
+

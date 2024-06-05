@@ -268,7 +268,6 @@ namespace Identity.Api.Areas.Identity.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> EmailConfirmation(string userId, string username, string email, string code)
         {
             if (userId == null || code == null)
@@ -292,7 +291,8 @@ namespace Identity.Api.Areas.Identity.Controllers
             return View();
         }
 
-        [HttpPost("/logout/")]
+        [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {

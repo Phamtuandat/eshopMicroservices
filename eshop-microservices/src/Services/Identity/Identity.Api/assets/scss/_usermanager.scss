@@ -1,69 +1,234 @@
-.personal-profle{
+.personal-profle {
     border-radius: 20px;
     overflow: hidden;
-    h4{
+
+    h4 {
         color: black;
         padding: 10px;
-       
     }
-    .personal-profle-content{
+
+    .personal-profle-content {
         padding: 20px;
     }
-    
 }
+
 .bg-personal-image {
     background: url("/Contents/Image/personal.jpg");
     background-position: center;
     padding-right: -1.5rem;
+}
 
-  }
-.account{
-    h1{
+.account {
+    h1 {
         color: black;
     }
+
     padding: 20px;
 }
-.phone{
+
+.phone {
     padding: 0 10px;
     min-height: 600px;
-    .phone-form{
+
+    .phone-form {
         padding-top: 50px;
         padding-bottom: 50px;
         display: flex;
         flex-direction: column;
-        .phone-form-header{
+
+        .phone-form-header {
             flex: 1;
         }
-        .phone-form-input{
+
+        .phone-form-input {
             flex: 2;
         }
     }
 }
-.connection{
+
+.connection {
     padding: 0 10px;
     min-height: 600px;
 }
+
 .bg-connection-image {
     background: url("/Contents/Image/connection.webp");
     background-position: center;
     background-size: cover;
 }
-.repassword{
+
+.repassword {
     padding: 20px 20px !important;
     min-height: 600px;
 }
+
 .bg-repassword-image {
     background: url("/Contents/Image/lock.webp");
     background-position: center;
     background-size: cover;
 }
+
 .bg-register-image, .bg-login-image {
     background: url("/Contents/Image/lock.webp") !important;
     background-position: center;
 }
-.form-control-register{
+
+.form-control-register {
     margin: 14px 0;
 }
-.register-btn{
+
+.register-btn {
     margin-top: 14px
+}
+
+.manage-content {
+
+    .header {
+        h2 {
+            text-align: center;
+            font-weight: normal;
+        }
+
+        p.desc {
+            text-align: center
+        }
+    }
+
+    .name-container {
+        .name-formfield {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+
+            input {
+                width: 360px;
+            }
+
+            button {
+                margin-top: 20px
+            }
+        }
+    }
+}
+
+.homepage {
+    display: flex;
+    justify-content: center;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+
+    div.info-item {
+        border: solid 1px #ccc;
+        padding: 30px 0 0 0;
+        max-width: 960px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+
+        h5 {
+        }
+    }
+
+    .info-basic {
+        .info-basic-header {
+            padding: 10px 30px;
+        }
+
+        .info-basic-content {
+            a.item {
+                text-decoration: none;
+                color: black;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: aliceblue
+                }
+
+                border-top: solid 1px #ccc;
+                justify-content: space-between;
+                min-height: 50px;
+                align-items: center;
+                padding: 10px 30px;
+
+                span.context {
+                    width: 100%;
+                    text-align: start
+                }
+
+                .fieldname {
+                    font-size: small;
+                    font-weight: 600;
+                    opacity: 0.8;
+                    min-width: 160px
+                }
+
+                .profile-picture {
+                    width: 46px;
+                    height: 46px;
+                    border-radius: 50%
+                }
+            }
+        }
+    }
+
+    .info-contac {
+    }
+
+    .infor-address {
+    }
+
+}
+.changePassword {
+    border: solid 1px #ccc;
+    border-radius: 10px;
+    padding: 40px;
+    max-width:960px;
+    h4 {
+        margin-bottom: 30px;
+        text-align: center
+    }
+
+    .form-btn{
+        width:100%;
+        justify-content: space-between;
+        display: flex
+    }
+}
+
+.image-form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: solid 1px #ccc;
+    border-radius: 10px;
+    min-height: 400px;
+    align-items: center;
+    margin: 40px;
+
+    .picture {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: solid 1px #ccc;
+        margin: 30px 0;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        #imagePreview {
+            width: 120%
+        }
+    }
+
+    .image-form-input {
+        display: flex;
+
+        input {
+            display: none
+        }
+    }
 }

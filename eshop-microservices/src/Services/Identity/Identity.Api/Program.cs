@@ -18,10 +18,14 @@ Log.Information("Starting up");
         .ConfigureServices()
         .ConfigurePipeline();
 
-    // this seeding is only for the template to bootstrap the DB and users.
-    // in production you will likely want a different approach.
+// this seeding is only for the template to bootstrap the DB and users.
+// in production you will likely want a different approach.
+if (args.Contains("/seed"))
+{
     Log.Information("Seeding database...");
     await SeedData.EnsureSeedData(app);
     Log.Information("Done seeding database. Exiting.");
 
-    app.Run();
+}
+app.Run();
+

@@ -7,5 +7,7 @@ namespace Background.API.Services
         Task<bool> SendOrderCheckoutEmailAsync(string toEmail, string subject);
 
         Task<bool> SendUserAccountConfirmEmailAsync(string userEmail, string redirectUrl, string username);
+
+        Task<bool> SendOTPEmailAsync( string code, string email);
     }
 }

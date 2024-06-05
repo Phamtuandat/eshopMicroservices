@@ -1,0 +1,38 @@
+﻿@inject UserManager<ApplicationUser> _userMgz;
+@inject AppbarService _appbarService
+
+@{
+    var user = await _userMgz.GetUserAsync(User);
+}
+
+<div class="name-container">
+    <form asp-action="ChangeName">
+        <div class="name-formfield">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input id="firstName" class="form-control" value="@user?.FirstName" name="firstName" placeholder="First Name" type="text" />
+            </div>
+            <div class="form-group">
+                <label for="lasName" class=" form-label">
+                    Last Name
+                </label>
+                <input id="lastName" class="form-control" value="@user?.LastName" name="lastName" type="text" placeholder="Last Name" />
+            </div>
+        <button type="submit" class="btn btn-primary">
+            Change
+        </button>
+        </div>
+    </form>
+</div>
+
+
+@section Sidebar {
+    @Html.Raw(_appbarService.RenderHtml())
+}
+@{
+    _appbarService.SetActive("Manage", "Profile", "Identity");
+}
+
+
+
+

@@ -118,7 +118,7 @@ namespace Identity.Api
                     dat = new ApplicationUser
                     {
                         UserName = "dat",
-                        Email = "phamtuandat1a0@email.com",
+                        Email = "phamtuandat1a0@gmail.com",
                         EmailConfirmed = true
                     };
                     var result = userMgr.CreateAsync(dat, "Phamdat11a1$").Result;

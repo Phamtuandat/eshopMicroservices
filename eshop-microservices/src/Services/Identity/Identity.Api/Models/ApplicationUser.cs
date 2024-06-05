@@ -2,6 +2,7 @@
 // See LICENSE in the project root for license information.
 
 
+using Identity.Api.Enums;
 using Microsoft.AspNetCore.Identity;
 
 namespace Identity.Api.Models
@@ -11,6 +12,9 @@ namespace Identity.Api.Models
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-
+        public string? AddressLine { get; set; }
+        public Gender? Gender { get; set; }
+        public string? ProfilePicture { get; set; }
+        public DateOnly? Birthday { get; set; }
     }
 }

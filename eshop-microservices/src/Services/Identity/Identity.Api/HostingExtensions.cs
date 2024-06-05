@@ -1,13 +1,15 @@
 using BuildingBlocks.Messaging.MassTransit;
 using Duende.IdentityServer;
 using Identity.Api.Data;
+using Identity.Api.Middlewares;
 using Identity.Api.Models;
 using Identity.Api.Services;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
 using Serilog;
-using System.IO;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Identity.Api
 {
@@ -19,6 +21,11 @@ namespace Identity.Api
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            builder.Services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = builder.Configuration.GetConnectionString("Redis");
+                options.InstanceName = "Identity";
+            });
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -38,6 +45,11 @@ namespace Identity.Api
                 .AddAspNetIdentity<ApplicationUser>()
                 .AddProfileService<ProfileService>();
             builder.Services.AddAuthentication()
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Account/login";
+                    options.LogoutPath = "/Account/Logout";
+                })
                 .AddGoogle(options =>
                 {
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
@@ -48,6 +60,9 @@ namespace Identity.Api
                     options.ClientId = "copy client ID from Google here";
                     options.ClientSecret = "copy client secret from Google here";
                 });
+
+            builder.Services.AddTransient<IActionContextAccessor, ActionContextAccessor>();
+            builder.Services.AddTransient<AppbarService>();
 
             return builder.Build();
         }
@@ -60,6 +75,37 @@ namespace Identity.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler(exceptionHandlerApp =>
+                {
+                    exceptionHandlerApp.Run(async context =>
+                    {
+                        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+
+                        // using static System.Net.Mime.MediaTypeNames;
+                        context.Response.ContentType = Text.Plain;
+
+                        await context.Response.WriteAsync("An exception was thrown.");
+
+                        var exceptionHandlerPathFeature =
+                            context.Features.Get<IExceptionHandlerPathFeature>();
+
+                        if (exceptionHandlerPathFeature?.Error is FileNotFoundException)
+                        {
+                            await context.Response.WriteAsync(" The file was not found.");
+                        }
+
+                        if (exceptionHandlerPathFeature?.Path == "/")
+                        {
+                            await context.Response.WriteAsync(" Page: Home.");
+                        }
+                    });
+                });
+            }
+            app.UseRedirectMiddleware();
+            app.UseStatusCodePagesWithRedirects("/Error/{0}");
+            app.UseHsts();
             app.UseStaticFiles();
             app.UseRouting();
             app.UseIdentityServer();
@@ -69,28 +115,15 @@ namespace Identity.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers(); // Map controllers
-                endpoints.MapAreaControllerRoute(
-                    name: "Identity",
-                    areaName: "Identity",
-                    pattern: "Account/{controller=Home}/{action=Index}/{id?}");
+
             });
-            string path;
-            if (app.Environment.IsDevelopment())
-            {
-                
-                app.UseHsts();
 
-                app.UseHttpsRedirection();
-                path = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
-            }
-            else
-            {
-                path = "/app/Uploads";
+            app.UseHsts();
 
-            }
+            app.UseHttpsRedirection();
+
             app.UseStaticFiles(new StaticFileOptions()
             {
-                FileProvider = new PhysicalFileProvider(path),
                 RequestPath = "/contents"
             });
             return app;

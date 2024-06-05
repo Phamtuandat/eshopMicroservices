@@ -1,0 +1,39 @@
+
+.manage {
+    display: flex;
+    flex-direction: row;
+
+    .manage-appbar {
+        min-height: 99vh;
+        min-width: 300px;
+        border-right: solid 1px #ccc;
+        padding-right: 20px;
+        margin-right:20px;
+        ul {
+            padding-left: 0 !important;
+
+            li.active {
+                background-color: #acfaff;
+            }
+
+            li {
+                border-radius: 0 22px 22px 0;
+
+                a {
+                    color: black;
+                    margin-left: 30px;
+                    padding: 10px 0;
+
+                    i {
+                        margin-right: 20px
+                    }
+                }
+            }
+        }
+    }
+
+    .manage-content {
+        width: 100%;
+        padding-top:50px;
+    }
+}

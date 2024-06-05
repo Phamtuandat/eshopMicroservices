@@ -1,0 +1,57 @@
+﻿@model ProfilePictureViewModel
+@inject AppbarService _appbarService
+
+
+@{
+    ViewBag.Title = "Upload Image";
+}
+
+
+@using (Html.BeginForm("EditProfilePicture", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="image-form">
+        <h2>Upload Image</h2>
+        <form asp-controller="Manage" asp-action="EditProfilePicture"
+              method="post" role="form">
+
+            <div class="form-group picture">
+                <img id="imagePreview" src="@Model.ProfilePicture" alt="Image Preview" height:auto;" />
+            </div>
+            <div class="image-form-input">
+                <div class="form-group">
+                    <button id="customFileButton" type="button" class="btn btn-primary">
+                        Change
+                    </button>
+                    <input type="file" name="FormFile" id="file" class="form-control" asp-for="FormFile"/>
+                    <button type="post" class="btn btn-primary">Upload</button>
+                </div>
+            </div>
+        </form>
+    </div>
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        document.getElementById("customFileButton").addEventListener("click", function () {
+            document.getElementById("file").click();
+        });
+        document.getElementById("file").addEventListener("change", function (event) {
+            var file = event.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var preview = document.getElementById("imagePreview");
+                    preview.src = e.target.result;
+                    preview.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+}
+@section Sidebar {
+    @Html.Raw(_appbarService.RenderHtml())
+}
+@{
+    _appbarService.SetActive("Manage", "Index", "Identity");
+}

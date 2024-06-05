@@ -1,3 +1,36 @@
+.manage {
+  display: flex;
+  flex-direction: row;
+}
+.manage .manage-appbar {
+  min-height: 99vh;
+  min-width: 300px;
+  border-right: solid 1px #ccc;
+  padding-right: 20px;
+  margin-right: 20px;
+}
+.manage .manage-appbar ul {
+  padding-left: 0 !important;
+}
+.manage .manage-appbar ul li.active {
+  background-color: #acfaff;
+}
+.manage .manage-appbar ul li {
+  border-radius: 0 22px 22px 0;
+}
+.manage .manage-appbar ul li a {
+  color: black;
+  margin-left: 30px;
+  padding: 10px 0;
+}
+.manage .manage-appbar ul li a i {
+  margin-right: 20px;
+}
+.manage .manage-content {
+  width: 100%;
+  padding-top: 50px;
+}
+
 .view-post .post-content {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -81,4 +114,134 @@
 
 .register-btn {
   margin-top: 14px;
+}
+
+.manage-content .header h2 {
+  text-align: center;
+  font-weight: normal;
+}
+.manage-content .header p.desc {
+  text-align: center;
+}
+.manage-content .name-container .name-formfield {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+.manage-content .name-container .name-formfield input {
+  width: 360px;
+}
+.manage-content .name-container .name-formfield button {
+  margin-top: 20px;
+}
+
+.homepage {
+  display: flex;
+  justify-content: center;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+.info div.info-item {
+  border: solid 1px #ccc;
+  padding: 30px 0 0 0;
+  max-width: 960px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.info .info-basic .info-basic-header {
+  padding: 10px 30px;
+}
+.info .info-basic .info-basic-content a.item {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  border-top: solid 1px #ccc;
+  justify-content: space-between;
+  min-height: 50px;
+  align-items: center;
+  padding: 10px 30px;
+}
+.info .info-basic .info-basic-content a.item:hover {
+  background-color: aliceblue;
+}
+.info .info-basic .info-basic-content a.item span.context {
+  width: 100%;
+  text-align: start;
+}
+.info .info-basic .info-basic-content a.item .fieldname {
+  font-size: small;
+  font-weight: 600;
+  opacity: 0.8;
+  min-width: 160px;
+}
+.info .info-basic .info-basic-content a.item .profile-picture {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+}
+.changePassword {
+  border: solid 1px #ccc;
+  border-radius: 10px;
+  padding: 40px;
+  max-width: 960px;
+}
+.changePassword h4 {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.changePassword .form-btn {
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+}
+
+.image-form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: solid 1px #ccc;
+  border-radius: 10px;
+  min-height: 400px;
+  align-items: center;
+  margin: 40px;
+}
+.image-form .picture {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: solid 1px #ccc;
+  margin: 30px 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.image-form .picture #imagePreview {
+  width: 120%;
+}
+.image-form .image-form-input {
+  display: flex;
+}
+.image-form .image-form-input input {
+  display: none;
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 40px;
+}
+
+li {
+  list-style: none;
+}
+
+#content {
+  flex: 1;
 }
