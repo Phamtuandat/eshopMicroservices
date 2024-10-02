@@ -13,7 +13,7 @@ namespace BuildingBlocks.Messaging.Events
 
         public int Quantity { get; set; } = default!;
 
-        public List<BasketCheckOutItem> basketCheckOutItems { get; set; }
+        public List<BasketCheckOutItem> BasketCheckOutItems { get; set; } = [];
 
         public string? CouponCode { get; set; } = default!;
 

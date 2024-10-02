@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Mapster;
 using Identity.Api.Areas.Identity.Models.Manage;
 using Microsoft.AspNetCore.Authorization;
-using Identity.Api.Services;
 using MassTransit;
 using BuildingBlocks.Messaging.Events;
 using Microsoft.Extensions.Caching.Distributed;
@@ -57,7 +56,7 @@ namespace Identity.Api.Areas.Identity.Controllers
         {
 
             var currentUser = await _userMgr.GetUserAsync(User);
-            if (currentUser == null) RedirectToAction("Login", "Account");
+            if (currentUser == null) return RedirectToAction("Login", "Account");
             currentUser.ProfilePicture ??= "https://th.bing.com/th/id/OIP.XnpM4kcShhqe-aPu7rvF5wHaF3?w=232&h=184&c=7&r=0&o=5&dpr=1.3&pid=1.7";
             return View(new ProfilePictureViewModel() { ProfilePicture = currentUser?.ProfilePicture });
         }
@@ -67,15 +66,27 @@ namespace Identity.Api.Areas.Identity.Controllers
         {
             var file = model.FormFile;
             var userId = HttpContext.User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-            if (userId == null) RedirectToAction("login", "account");
+            if (userId.IsNullOrEmpty()) return RedirectToAction("login", "account");
             var currentUser = await _userMgr.FindByIdAsync(userId);
-            if (currentUser == null) RedirectToAction("Login", "Account");
+            if (currentUser == null) return RedirectToAction("Login", "Account");
             currentUser.ProfilePicture ??= "https://th.bing.com/th/id/OIP.XnpM4kcShhqe-aPu7rvF5wHaF3?w=232&h=184&c=7&r=0&o=5&dpr=1.3&pid=1.7";
             if (file != null)
             {
+                string staticPath = "";
+                var currentImage = currentUser.ProfilePicture;
+                if (!currentImage.IsNullOrEmpty())
+                {
+
+                    System.IO.File.Delete(staticPath);
+                    if (System.IO.File.Exists(staticPath))
+                    {
+                        staticPath = currentImage.Replace($"{Request.Scheme}://{Request.Host}", "wwwroot");
+                    }
+                }
                 var fileExtension = Path.GetExtension(file.FileName);
                 var newFileName = $"{Guid.NewGuid()}{fileExtension}";
                 var path = Path.Combine(_env.WebRootPath, "Images/ProfileImage", newFileName);
+
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
                     string filePath = Path.Combine("Images", "ProfileImage", newFileName);
@@ -92,7 +103,7 @@ namespace Identity.Api.Areas.Identity.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ChangeName()
+        public IActionResult ChangeName()
         {
 
             return View();
@@ -104,7 +115,7 @@ namespace Identity.Api.Areas.Identity.Controllers
             if (firstName == null || lastName == null) return View();
 
             var user = await _userMgr.GetUserAsync(User);
-            if (user != null) RedirectToAction("login", "account");
+            if (user == null) return RedirectToAction("login", "account");
             user.FirstName = firstName;
             user.LastName = lastName;
             await _userMgr.UpdateAsync(user);
@@ -132,7 +143,7 @@ namespace Identity.Api.Areas.Identity.Controllers
             var user = await _userMgr.GetUserAsync(User);
             if (user != null)
             {
-                var otp = GenerateOtp(6);
+                var otp = _GenerateOtp(6);
                 if (otp.IsNullOrEmpty())
                 {
                     throw new Exception("Can not create OTP code");
@@ -145,7 +156,7 @@ namespace Identity.Api.Areas.Identity.Controllers
                     var message = new SentOTPEvent()
                     {
                         Code = otp,
-                        Email = user.Email
+                        Email = user.Email ?? string.Empty
 
                     };
                     await _publish.Publish(message);
@@ -170,6 +181,7 @@ namespace Identity.Api.Areas.Identity.Controllers
             if (isValidPassword)
             {
                 var token = await _cache.GetStringAsync(model.OtpCode);
+                if (token == null) return View();
                 var result = await _userMgr.ResetPasswordAsync(user, token, model.NewPassword);
                 if (result.Succeeded)
                 {
@@ -190,7 +202,7 @@ namespace Identity.Api.Areas.Identity.Controllers
             }
         }
 
-        private string GenerateOtp(int length)
+        private string _GenerateOtp(int length)
         {
             Random random = new Random();
             char[] otp = new char[length];

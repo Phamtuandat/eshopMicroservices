@@ -69,6 +69,7 @@ namespace Identity.Api
 
         public static WebApplication ConfigurePipeline(this WebApplication app)
         {
+           
             app.UseSerilogRequestLogging();
 
             if (app.Environment.IsDevelopment())
@@ -112,12 +113,12 @@ namespace Identity.Api
             app.UseAuthentication();
             app.UseAuthorization();
 
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers(); // Map controllers
 
             });
-
             app.UseHsts();
 
             app.UseHttpsRedirection();

@@ -2,9 +2,9 @@
 
 public class BasketCheckoutDto
 {
-    public string? UserName { get; set; } = default!;
-    public string? CustomerId { get; set; } = default!;
-    public string? CouponCode { get; set; } = default!;
+    public string UserName { get; set; } = default!;
+    public string CustomerId { get; set; } = default!;
+    public string CouponCode { get; set; } = default!;
 
     // Shipping and BillingAddress
     public string FirstName { get; set; } = default!;

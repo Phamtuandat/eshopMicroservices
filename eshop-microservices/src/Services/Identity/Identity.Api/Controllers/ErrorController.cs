@@ -20,7 +20,7 @@ namespace Identity.Api.Controllers
 
 
         [Route("Error/403")]
-        public IActionResult Forbid()
+        public IActionResult Fobbiden()
         {
             Response.StatusCode = 403;
             return View();

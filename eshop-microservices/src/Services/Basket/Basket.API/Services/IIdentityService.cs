@@ -2,6 +2,6 @@
 {
     public interface IIdentityService
     {
-        Customer? GetUserIdentity();
+        Customer GetUserIdentity();
     }
 }

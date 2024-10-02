@@ -23,6 +23,6 @@ if (app.Environment.IsDevelopment()) {
     await app.InitialiseDatabaseAsync();
 }
 
-Log.Information(builder.Configuration.GetConnectionString("Database"));
+Log.Information(builder.Configuration.GetConnectionString("Database") ?? "Empty");
 
 app.Run();

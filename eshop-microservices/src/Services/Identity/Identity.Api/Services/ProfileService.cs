@@ -17,6 +17,7 @@ namespace Identity.Api.Services
             context.IssuedClaims.AddRange(context.Subject.Claims);
 
             var user = await _userManager.GetUserAsync(context.Subject);
+            if (user == null) return;
 
             var roles = await _userManager.GetRolesAsync(user);
 
@@ -27,9 +28,9 @@ namespace Identity.Api.Services
 
         }
 
-        public async Task IsActiveAsync(IsActiveContext context)
+        public  Task IsActiveAsync(IsActiveContext context)
         {
-            return;
+            return Task.CompletedTask;
         }
     }
 }

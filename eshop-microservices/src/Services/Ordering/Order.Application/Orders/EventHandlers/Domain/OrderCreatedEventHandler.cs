@@ -23,7 +23,7 @@ namespace Ordering.Application.Orders.EventHandlers.Domain
                 var orderCreatedIntegrationEvent = domainEvent.Order.ToOrderDto();
                 var checkedOutEvent = new CheckedOutEvent() { Success = true,
                     CustomerId = orderCreatedIntegrationEvent.CustomerId,
-                    Id = orderCreatedIntegrationEvent.Id,
+                    OrderId = orderCreatedIntegrationEvent.Id,
                     ErrorMessage = null,
                     CouponCode = orderCreatedIntegrationEvent.CouponCode,
                 };

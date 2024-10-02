@@ -2,11 +2,11 @@
 {
     public class Coupon
     {
-        public Guid Id { get; set; }
-        public string Description { get; set; }
-        public int DiscountPercentage { get; set; }
-        public int Quantity { get; set; }
+        public Guid Id { get; set; } = default!;
+        public string Description { get; set; } = default!;
+        public int DiscountPercentage { get; set; } = default!;
+        public int Quantity { get; set; } = default!;
 
-        public string Code { get; set; }
+        public string Code { get; set; } = default!;
     }
 }

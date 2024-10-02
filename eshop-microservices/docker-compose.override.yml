@@ -44,6 +44,7 @@ services:
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD
+    restart: always
     ports:
       - "1433:1433"
 

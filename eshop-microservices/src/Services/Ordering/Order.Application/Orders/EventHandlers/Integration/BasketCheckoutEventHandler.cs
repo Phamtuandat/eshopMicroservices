@@ -29,7 +29,7 @@ namespace Ordering.Application.Orders.EventHandlers.Integration
             var addressDto = new AddressDto(message.FirstName, message.LastName, message.EmailAddress, message.AddressLine, message.Country, message.State, message.ZipCode);
             var paymentDto = new PaymentDto(message.CardName, message.CardNumber, message.Expiration, message.CVV, message.PaymentMethod);
             var orderId = Guid.NewGuid();
-            var orderItems = message.basketCheckOutItems.Select(b => new OrderItemDto(orderId, b.ProductId, b.Quantity, b.Price)).ToList();
+            var orderItems = message.BasketCheckOutItems.Select(b => new OrderItemDto(orderId, b.ProductId, b.Quantity, b.Price)).ToList();
             var orderDto = new OrderDto(
                 Id: orderId,
                 CustomerId: message.CustomerId,

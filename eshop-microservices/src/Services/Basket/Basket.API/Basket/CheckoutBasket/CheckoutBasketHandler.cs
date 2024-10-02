@@ -31,10 +31,10 @@ public class CheckoutBasketCommandHandler
         
 
         var eventMessage = command.BasketCheckoutDto.Adapt<BasketCheckoutEvent>();
-        eventMessage.basketCheckOutItems = basket.Items.Adapt<List<BasketCheckOutItem>>();
+        eventMessage.BasketCheckOutItems = basket.Items.Adapt<List<BasketCheckOutItem>>();
         if (command.BasketCheckoutDto.CouponCode != null)
             await _DeductDiscount(eventMessage, cancellationToken);
-        eventMessage.basketCheckOutItems = basket.Items.Adapt<List<BasketCheckOutItem>>();
+        eventMessage.BasketCheckOutItems = basket.Items.Adapt<List<BasketCheckOutItem>>();
         await publishEndpoint.Publish(eventMessage, cancellationToken);
 
 
@@ -48,7 +48,7 @@ public class CheckoutBasketCommandHandler
         if(coupon.Code == "No Discount") throw new Exception("Coupon is invalid!");
         if(coupon.Code == "Coupon is out of stock") throw new Exception($"{coupon.Code} is out of stock");
         decimal discountPercentage = (decimal)coupon.DiscountPercentage / 100;
-        foreach (var item in cart.basketCheckOutItems)
+        foreach (var item in cart.BasketCheckOutItems)
         {
             decimal discountAmount = discountPercentage * item.Price;
             item.Price -= discountAmount;   

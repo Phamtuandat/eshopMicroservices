@@ -14,7 +14,9 @@ namespace Identity.Api.Services
         public AppbarService(IUrlHelperFactory factory, IActionContextAccessor action, ILogger<AppbarService> logger)
         {
             _logger = logger;
-            urlHelper = factory.GetUrlHelper(action.ActionContext);
+            var actionContext = action.ActionContext;
+            if (actionContext == null) return;
+            urlHelper = factory.GetUrlHelper(actionContext);
             items = new List<SidebarItem>(){
                   new SidebarItem()
                   {
@@ -104,17 +106,17 @@ namespace Identity.Api.Services
     }
     public class SidebarItem
     {
-        public string Title { get; set; }
+        public string Title { get; set; } = default!;
         public bool IsActive { get; set; }
         public SidebarItemType Type { get; set; }
-        public string Action { get; set; }
-        public string Controller { get; set; }
-        public string Area { get; set; }
-        public string FontAwesomeIcon { get; set; }
-        public List<SidebarItem> Items { get; set; }
-        public string collapseId { get; set; }
-        public string CssClass { get; set; }
-        public string GetUrl(IUrlHelper urlHelper)
+        public string Action { get; set; } = default!;
+        public string Controller { get; set; } = default!;
+        public string Area { get; set; } = default!;
+        public string FontAwesomeIcon { get; set; } = default!;
+        public List<SidebarItem> Items { get; set; } = default!;
+        public string collapseId { get; set; } = default!;
+        public string CssClass { get; set; } = default!;
+        public string? GetUrl(IUrlHelper urlHelper)
         {
             return urlHelper.Action(Action, Controller, new { area = Area });
         }

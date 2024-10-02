@@ -11,10 +11,10 @@ namespace Basket.API.Data
             return true;
         }
 
-        public async Task<ShoppingCart>? GetBasket(string userId, CancellationToken cancellationToken = default)
+        public async Task<ShoppingCart> GetBasket(string userId, CancellationToken cancellationToken = default)
         {
             var basket = await session.LoadAsync<ShoppingCart>(userId, cancellationToken);
-            return basket;
+            return basket ?? new ShoppingCart();
 
         }
 

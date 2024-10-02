@@ -8,8 +8,8 @@ namespace BuildingBlocks.Messaging.Events
 {
     public record CheckedOutEvent : IntergrationEvent
     {
-        public Guid Id { get; set; } = default!;
-        public string CustomerId { get; set; } = default!;
+        public Guid OrderId { get; set; }
+        public string CustomerId { get; set; }
         public bool Success { get; set; }
         public string? CouponCode { get; set; }
         public string? ErrorMessage { get; set; }

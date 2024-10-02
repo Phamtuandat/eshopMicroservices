@@ -1,0 +1,10 @@
+MESSAGE_USER=guest
+MESSAGE_PASSWORD=guest
+POSTGRES_USER=phamdat
+POSTGRES_PASSWORD=phamdat11a1
+POSTGRES_DB=BasketDb
+SA_PASSWORD=Phamdat11a1
+SMTP_PASSWORD=ujtk lich ohqb rwqq
+SMTP_USERNAME=phamtuandat150197@gmail.com
+SMTP_SENDER_EMAIL=phamtuandat150197@gmail.com
+SMTP_SENDER_NAME=Dev Shop

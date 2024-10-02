@@ -14,6 +14,11 @@ namespace Background.API.Services
       
         private readonly SmtpSettings _smtpSettings = smtpSettings.Value;
 
+        public Task<bool> SendOrderCheckoutEmail(string toEmail, string subject)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> SendOTPEmailAsync(string code, string email)
         {
             var message = await File.ReadAllTextAsync(Path.Combine(_env.WebRootPath, "EmailTemplates/SentOTPEmailTemplate.html"));
@@ -46,11 +51,6 @@ namespace Background.API.Services
             return true;
         }
 
-        public async Task<bool> SendOrderCheckoutEmailAsync(string toEmail, string subject)
-        {
-
-            return true;
-        }
 
         public async Task<bool> SendUserAccountConfirmEmailAsync(string toEmail, string redirectUrl, string username)
         {

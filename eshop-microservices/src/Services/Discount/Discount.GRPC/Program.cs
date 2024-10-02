@@ -87,7 +87,7 @@ app.Use(async (context, next) =>
 {
     var user = context.User;
 
-    next.Invoke(context);
+    await next.Invoke(context);
 });
 app.MapCarter();
 // Configure the HTTP request pipeline.

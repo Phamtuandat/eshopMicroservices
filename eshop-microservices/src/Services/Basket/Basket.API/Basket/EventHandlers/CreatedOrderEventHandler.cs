@@ -14,7 +14,7 @@ namespace Basket.API.Basket.EventHandlers
             if(message.Success)
             {
                 var command = new DeleteBasketCommand(message.CustomerId);
-                var result  = await _sender.Send(command);
+                await _sender.Send(command);
               
                 _logger.LogDebug("Create order is successfully!");
               

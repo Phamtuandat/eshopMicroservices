@@ -13,6 +13,7 @@ public class CheckoutBasketEndpoints(IIdentityService identityService) : ICarter
         app.MapPost("/basket/checkout", async (CheckoutBasketRequest request, ISender sender) =>
         {
             var customer = _identityService.GetUserIdentity();
+            if (customer == null) return Results.Unauthorized();
             request.BasketCheckoutDto.UserName = customer.UserName;
             request.BasketCheckoutDto.CustomerId = customer.CustomerId;
             var command = request.Adapt<CheckoutBasketCommand>();

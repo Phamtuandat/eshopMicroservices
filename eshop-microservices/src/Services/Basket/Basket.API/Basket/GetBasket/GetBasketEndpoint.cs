@@ -14,7 +14,7 @@ namespace Basket.API.Basket.GetBasket
             app.MapGet("/basket/{userName}", async (string username, ISender sender) =>
             {
                 var userId = _identityService.GetUserIdentity();
-                
+                if (userId == null) return Results.Unauthorized();
                 var query = new GetBasketQuery(userId.CustomerId);
                 var result = await sender.Send(query);
                 var response = result.Adapt<GetBasketResponse>();

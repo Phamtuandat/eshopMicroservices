@@ -45,7 +45,7 @@ namespace Discount.GRPC.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0fd362d0-04db-4d07-87b1-041ff2ffb283"),
+                            Id = new Guid("9529c72c-ffcb-46a6-a58e-ab279114a17c"),
                             Code = "NEWBIE24",
                             Description = "Newbie Discount",
                             DiscountPercentage = 15,
@@ -53,7 +53,7 @@ namespace Discount.GRPC.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a5e8e538-fa7f-4774-be47-220a336e2e75"),
+                            Id = new Guid("09fd4c2f-ff4c-4dc5-81ec-67747d3207cd"),
                             Code = "FREESHIP05",
                             Description = "Freeship Discount",
                             DiscountPercentage = 10,

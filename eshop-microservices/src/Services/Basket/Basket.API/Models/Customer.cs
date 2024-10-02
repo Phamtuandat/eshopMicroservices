@@ -2,7 +2,7 @@
 {
     public class Customer
     {
-        public string  CustomerId { get; set; }
-        public string UserName { get; set; }
+        public string CustomerId { get; set; } = default!;
+        public string UserName { get; set; } = default!;
     }
 }
